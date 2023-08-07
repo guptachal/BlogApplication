@@ -3,7 +3,11 @@ package com.portfolio.blog.Blog.controller;
 import com.portfolio.blog.Blog.payload.PostDto;
 import com.portfolio.blog.Blog.payload.PostResponse;
 import com.portfolio.blog.Blog.service.IPostService;
+import com.portfolio.blog.Blog.service.impl.UserDetailsServiceImpl;
 import com.portfolio.blog.Blog.utils.AppConstants;
+import jdk.nashorn.internal.runtime.options.LoggingOption;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +18,14 @@ import java.util.List;
 @RequestMapping("/api")
 public class PostController {
     private IPostService postService;
-    @Autowired
-    public PostController(IPostService postService) {
-        this.postService = postService;
-    }
+    private UserDetailsServiceImpl userDetailsService;
+    private Logger LOGGER = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    public PostController(IPostService postService, UserDetailsServiceImpl userDetailsService) {
+        this.postService = postService;
+        this.userDetailsService = userDetailsService;
+    }
     // Create the bolg post Rest API
     @PostMapping("/posts")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
@@ -31,6 +38,7 @@ public class PostController {
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false) String sortDir
     ) throws Exception{
+
         return postService.getAllPost(pageNo,pageSize,sortBy,sortDir);
     }
     @GetMapping("/posts/{title}")

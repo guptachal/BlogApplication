@@ -4,9 +4,6 @@ import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.action.internal.OrphanRemovalAction;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -31,6 +28,5 @@ public class Post {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @DBRef(db = "Comment")
-    @Cascade(CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 }

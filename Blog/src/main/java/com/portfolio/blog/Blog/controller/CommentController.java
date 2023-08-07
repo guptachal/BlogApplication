@@ -2,9 +2,8 @@ package com.portfolio.blog.Blog.controller;
 
 import com.portfolio.blog.Blog.payload.CommentDto;
 import com.portfolio.blog.Blog.service.ICommentService;
-import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class CommentController {
     private ICommentService commentService;
+    @Autowired
     public CommentController(ICommentService commentService) {
         this.commentService = commentService;
     }

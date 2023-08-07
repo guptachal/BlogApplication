@@ -7,8 +7,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 public class BlogApplication {
-	@Bean
-	public ModelMapper modelMapper(){return modelMapper();}
 	public static void main(String[] args) {
 		SpringApplication.run(BlogApplication.class, args);
 	}
